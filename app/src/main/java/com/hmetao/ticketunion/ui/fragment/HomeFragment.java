@@ -1,21 +1,21 @@
-package com.hmetao.ticketunion.ui.fregment;
+package com.hmetao.ticketunion.ui.fragment;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hmetao.ticketunion.R;
+import androidx.annotation.NonNull;
+
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.hmetao.ticketunion.base.BaseFragment;
 import com.hmetao.ticketunion.databinding.FragmentHomeBinding;
 import com.hmetao.ticketunion.model.domain.Category;
 import com.hmetao.ticketunion.presenter.HomePresenter;
 import com.hmetao.ticketunion.presenter.impl.HomePresenterImpl;
+import com.hmetao.ticketunion.ui.adapter.HomeAdapter;
+import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.view.HomeCallback;
 
 
@@ -24,6 +24,7 @@ public class HomeFragment extends BaseFragment implements HomeCallback {
 
     private FragmentHomeBinding binding;
     private HomePresenter presenter;
+    private HomeAdapter adapter;
 
 
     @Override
@@ -32,7 +33,6 @@ public class HomeFragment extends BaseFragment implements HomeCallback {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
 
     @Override
     protected void initPresenter() {
@@ -52,6 +52,20 @@ public class HomeFragment extends BaseFragment implements HomeCallback {
 
     @Override
     public void getCategoriesLoad(Category category) {
+        if (adapter == null) {
+            initViewPager(category);
+        } else {
+            adapter.setData(category);
+        }
+    }
 
+    private void initViewPager(Category category) {
+        adapter = new HomeAdapter(requireActivity(), category.getData());
+        binding.vp.setAdapter(adapter);
+        // 设置tabLayout
+        new TabLayoutMediator(binding.tl, binding.vp, (tab, position) -> {
+            binding.vp.setCurrentItem(position);
+            tab.setText(category.getData().get(position).getTitle());
+        }).attach();
     }
 }

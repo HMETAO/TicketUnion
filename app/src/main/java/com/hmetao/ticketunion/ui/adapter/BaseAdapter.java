@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.hmetao.ticketunion.base.BaseAdapterBuilder;
-import com.hmetao.ticketunion.ui.fregment.HomeFragment;
+import com.hmetao.ticketunion.ui.fragment.HomeFragment;
 
 import java.util.Objects;
 

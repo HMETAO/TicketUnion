@@ -10,10 +10,10 @@ import com.hmetao.ticketunion.R;
 import com.hmetao.ticketunion.databinding.ActivityMainBinding;
 import com.hmetao.ticketunion.ui.adapter.BaseAdapter;
 import com.hmetao.ticketunion.base.BaseAdapterBuilder;
-import com.hmetao.ticketunion.ui.fregment.HomeFragment;
-import com.hmetao.ticketunion.ui.fregment.RedPacketFragment;
-import com.hmetao.ticketunion.ui.fregment.SearchFragment;
-import com.hmetao.ticketunion.ui.fregment.SelectedFragment;
+import com.hmetao.ticketunion.ui.fragment.HomeFragment;
+import com.hmetao.ticketunion.ui.fragment.RedPacketFragment;
+import com.hmetao.ticketunion.ui.fragment.SearchFragment;
+import com.hmetao.ticketunion.ui.fragment.SelectedFragment;
 import com.hmetao.ticketunion.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {

@@ -15,10 +15,10 @@ public class BaseAdapterBuilder {
 
     public static int len = 0;
 
-    private final FragmentActivity fm;
+    private final FragmentActivity fa;
 
-    public BaseAdapterBuilder(FragmentActivity fm) {
-        this.fm = fm;
+    public BaseAdapterBuilder(FragmentActivity fa) {
+        this.fa = fa;
     }
 
     public BaseAdapterBuilder addFragment(Fragment fragment, int menusId) {
@@ -30,7 +30,7 @@ public class BaseAdapterBuilder {
 
 
     public BaseAdapter build() {
-        return new BaseAdapter(fm);
+        return new BaseAdapter(fa);
     }
 
     public static Integer getMenusByPosition(int position) {

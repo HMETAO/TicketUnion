@@ -1,18 +1,17 @@
-package com.hmetao.ticketunion.ui.fregment;
+package com.hmetao.ticketunion.ui.fragment;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.hmetao.ticketunion.R;
-import com.hmetao.ticketunion.base.BaseFragment;
 
 
-public class RedPacketFragment extends BaseFragment {
+public class HomePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +21,6 @@ public class RedPacketFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ret_packet, container, false);
+        return inflater.inflate(R.layout.fragment_home_page, container, false);
     }
 }
