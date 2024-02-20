@@ -9,8 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hmetao.ticketunion.R;
+import com.hmetao.ticketunion.base.BaseFragment;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

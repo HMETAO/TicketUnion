@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hmetao.ticketunion.R;
+import com.hmetao.ticketunion.base.BaseFragment;
 
 
-public class SelectedFragment extends Fragment {
+public class SelectedFragment extends BaseFragment {
 
 
 

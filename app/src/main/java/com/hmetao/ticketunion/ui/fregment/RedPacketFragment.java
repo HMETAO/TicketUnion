@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.hmetao.ticketunion.R;
+import com.hmetao.ticketunion.base.BaseFragment;
 
 
-public class RedPacketFragment extends Fragment {
+public class RedPacketFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
