@@ -1,24 +1,20 @@
 package com.hmetao.ticketunion.ui.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.view.DragEvent;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.hmetao.ticketunion.R;
 import com.hmetao.ticketunion.databinding.ActivityMainBinding;
 import com.hmetao.ticketunion.ui.adapter.BaseAdapter;
-import com.hmetao.ticketunion.ui.fregment.BaseAdapterBuilder;
+import com.hmetao.ticketunion.base.BaseAdapterBuilder;
 import com.hmetao.ticketunion.ui.fregment.HomeFragment;
 import com.hmetao.ticketunion.ui.fregment.RedPacketFragment;
 import com.hmetao.ticketunion.ui.fregment.SearchFragment;
 import com.hmetao.ticketunion.ui.fregment.SelectedFragment;
+import com.hmetao.ticketunion.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             vp.setCurrentItem(BaseAdapterBuilder.getPositionByMenuId(item.getItemId()));
             return true;
         });
+        LogUtils.d("初始化监听完成");
     }
 
     private BaseAdapter buildMenusAdapter() {
