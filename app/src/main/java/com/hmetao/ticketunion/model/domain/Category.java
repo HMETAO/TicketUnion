@@ -1,9 +1,21 @@
 package com.hmetao.ticketunion.model.domain;
 
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class Category {
+    @NonNull
+    @Override
+    public String toString() {
+        return "Category{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
 
     @com.google.gson.annotations.SerializedName("success")
     private Boolean success;
@@ -47,6 +59,15 @@ public class Category {
     }
 
     public static class DataDTO {
+        @NonNull
+        @Override
+        public String toString() {
+            return "DataDTO{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    '}';
+        }
+
         @com.google.gson.annotations.SerializedName("id")
         private Integer id;
         @com.google.gson.annotations.SerializedName("title")
