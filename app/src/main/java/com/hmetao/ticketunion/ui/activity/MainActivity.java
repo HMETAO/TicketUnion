@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private void initListener() {
         BaseAdapter adapter = buildMenusAdapter();
         ViewPager2 vp = binding.mainViewPager;
+        vp.setOffscreenPageLimit(1);
         BottomNavigationView bnv = binding.mainNavigationBar;
         vp.setAdapter(adapter);
         vp.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

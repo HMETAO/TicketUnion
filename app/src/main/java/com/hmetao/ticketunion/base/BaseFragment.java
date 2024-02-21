@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.hmetao.ticketunion.R;
 import com.hmetao.ticketunion.databinding.FragmentBaseBinding;
+import com.hmetao.ticketunion.databinding.FragmentErrorBinding;
 
 public abstract class BaseFragment extends Fragment {
     private State currentState;
@@ -24,11 +25,6 @@ public abstract class BaseFragment extends Fragment {
         NONE, LOADING, SUCCESS, ERROR, EMPTY
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,9 +33,14 @@ public abstract class BaseFragment extends Fragment {
         initPresenter();
         // 加载view
         loadStatesView(inflater, container, savedInstanceState, binding.container);
+        // 初始化view
+        initView(binding.getRoot());
         // 加载数据
         loadData();
         return binding.getRoot();
+    }
+
+    protected void initView(FrameLayout root) {
     }
 
     /**
@@ -76,7 +77,14 @@ public abstract class BaseFragment extends Fragment {
     protected abstract View loadSuccessView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     protected View loadErrorView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_error, container, false);
+        FragmentErrorBinding binding = FragmentErrorBinding.inflate(inflater, container, false);
+        binding.networkErrorTips.setOnClickListener(v -> {
+            onRetryClick();
+        });
+        return binding.getRoot();
+    }
+
+    protected void onRetryClick() {
     }
 
     protected View loadLoadingView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
