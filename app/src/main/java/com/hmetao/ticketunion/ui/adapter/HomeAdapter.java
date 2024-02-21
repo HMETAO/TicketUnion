@@ -24,7 +24,7 @@ public class HomeAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new HomePageFragment();
+        return new HomePageFragment(data.get(position));
     }
 
     @Override
