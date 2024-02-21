@@ -3,6 +3,7 @@ package com.hmetao.ticketunion.model.domain;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
 public class HomePageContent {
     @Override
@@ -57,6 +58,19 @@ public class HomePageContent {
     }
 
     public static class DataDTO {
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DataDTO dataDTO = (DataDTO) o;
+            return Objects.equals(categoryId, dataDTO.categoryId) && Objects.equals(clickUrl, dataDTO.clickUrl) && Objects.equals(commissionRate, dataDTO.commissionRate) && Objects.equals(couponAmount, dataDTO.couponAmount) && Objects.equals(couponClickUrl, dataDTO.couponClickUrl) && Objects.equals(couponEndTime, dataDTO.couponEndTime) && Objects.equals(couponRemainCount, dataDTO.couponRemainCount) && Objects.equals(couponShareUrl, dataDTO.couponShareUrl) && Objects.equals(couponStartFee, dataDTO.couponStartFee) && Objects.equals(couponStartTime, dataDTO.couponStartTime) && Objects.equals(couponTotalCount, dataDTO.couponTotalCount) && Objects.equals(itemDescription, dataDTO.itemDescription) && Objects.equals(itemId, dataDTO.itemId) && Objects.equals(levelOneCategoryId, dataDTO.levelOneCategoryId) && Objects.equals(levelOneCategoryName, dataDTO.levelOneCategoryName) && Objects.equals(pictUrl, dataDTO.pictUrl) && Objects.equals(reservePrice, dataDTO.reservePrice) && Objects.equals(sellerId, dataDTO.sellerId) && Objects.equals(shortTitle, dataDTO.shortTitle) && Objects.equals(smallImages, dataDTO.smallImages) && Objects.equals(subTitle, dataDTO.subTitle) && Objects.equals(title, dataDTO.title) && Objects.equals(tmallPlayActivityEndTime, dataDTO.tmallPlayActivityEndTime) && Objects.equals(tmallPlayActivityStartTime, dataDTO.tmallPlayActivityStartTime) && Objects.equals(userType, dataDTO.userType) && Objects.equals(volume, dataDTO.volume) && Objects.equals(zkFinalPrice, dataDTO.zkFinalPrice);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(categoryId, clickUrl, commissionRate, couponAmount, couponClickUrl, couponEndTime, couponRemainCount, couponShareUrl, couponStartFee, couponStartTime, couponTotalCount, itemDescription, itemId, levelOneCategoryId, levelOneCategoryName, pictUrl, reservePrice, sellerId, shortTitle, smallImages, subTitle, title, tmallPlayActivityEndTime, tmallPlayActivityStartTime, userType, volume, zkFinalPrice);
+        }
+
         @Override
         public String toString() {
             return "DataDTO{" +

@@ -3,6 +3,7 @@ package com.hmetao.ticketunion.ui.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.hmetao.ticketunion.model.domain.Category;
 import com.hmetao.ticketunion.model.domain.HomePageContent;
 import com.hmetao.ticketunion.presenter.CategoryPagePresenter;
 import com.hmetao.ticketunion.presenter.impl.CategoryPagePresenterImpl;
+import com.hmetao.ticketunion.ui.adapter.HomePageAdapter;
 import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.view.CategoryPageCallback;
 
@@ -24,6 +26,8 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
 
     Category.DataDTO data;
     private CategoryPagePresenterImpl presenter;
+    private com.hmetao.ticketunion.databinding.FragmentHomePageBinding binding;
+    private HomePageAdapter adapter;
 
     public HomePageFragment(Category.DataDTO data) {
         this.data = data;
@@ -52,20 +56,22 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
 
     @Override
     protected void initView(FrameLayout root) {
-        setUpState(State.SUCCESS);
+        adapter = new HomePageAdapter();
+        binding.rv.setAdapter(adapter);
+        binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
 
     @Override
     protected View loadSuccessView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentHomePageBinding binding = FragmentHomePageBinding.inflate(inflater, container, false);
+        binding = FragmentHomePageBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void getContentByCategoryIdLoad(HomePageContent homePageContent) {
         // 更新UI
-
+        adapter.submitList(homePageContent.getData());
     }
 
     @Override
