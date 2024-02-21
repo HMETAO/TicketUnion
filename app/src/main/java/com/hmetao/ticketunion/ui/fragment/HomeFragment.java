@@ -64,7 +64,6 @@ public class HomeFragment extends BaseFragment implements HomeCallback {
         binding.vp.setAdapter(adapter);
         // 设置tabLayout
         new TabLayoutMediator(binding.tl, binding.vp, (tab, position) -> {
-            binding.vp.setCurrentItem(position);
             tab.setText(category.getData().get(position).getTitle());
         }).attach();
     }
