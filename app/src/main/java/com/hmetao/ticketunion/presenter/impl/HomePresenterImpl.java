@@ -34,8 +34,8 @@ public class HomePresenterImpl implements HomePresenter {
                             callback.networkEmpty();
                         } else {
                             callback.networkSuccess();
+                            callback.getCategoriesLoad(category);
                         }
-                        callback.getCategoriesLoad(category);
                     }
                 }
             }

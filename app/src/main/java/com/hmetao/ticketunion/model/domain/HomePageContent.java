@@ -5,11 +5,20 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class HomePageContent {
+    @Override
+    public String toString() {
+        return "HomePageContent{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
 
     @SerializedName("success")
     private Boolean success;
     @SerializedName("code")
-    private Integer code;
+    private Long code;
     @SerializedName("message")
     private String message;
     @SerializedName("data")
@@ -23,11 +32,11 @@ public class HomePageContent {
         this.success = success;
     }
 
-    public Integer getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
@@ -48,24 +57,53 @@ public class HomePageContent {
     }
 
     public static class DataDTO {
+        @Override
+        public String toString() {
+            return "DataDTO{" +
+                    "categoryId=" + categoryId +
+                    ", clickUrl='" + clickUrl + '\'' +
+                    ", commissionRate='" + commissionRate + '\'' +
+                    ", couponAmount=" + couponAmount +
+                    ", couponClickUrl='" + couponClickUrl + '\'' +
+                    ", couponEndTime='" + couponEndTime + '\'' +
+                    ", couponRemainCount=" + couponRemainCount +
+                    ", couponShareUrl='" + couponShareUrl + '\'' +
+                    ", couponStartFee='" + couponStartFee + '\'' +
+                    ", couponStartTime='" + couponStartTime + '\'' +
+                    ", couponTotalCount=" + couponTotalCount +
+                    ", itemDescription='" + itemDescription + '\'' +
+                    ", itemId='" + itemId + '\'' +
+                    ", levelOneCategoryId=" + levelOneCategoryId +
+                    ", levelOneCategoryName='" + levelOneCategoryName + '\'' +
+                    ", pictUrl='" + pictUrl + '\'' +
+                    ", reservePrice='" + reservePrice + '\'' +
+                    ", sellerId=" + sellerId +
+                    ", shortTitle=" + shortTitle +
+                    ", smallImages=" + smallImages +
+                    ", subTitle='" + subTitle + '\'' +
+                    ", title='" + title + '\'' +
+                    ", tmallPlayActivityEndTime=" + tmallPlayActivityEndTime +
+                    ", tmallPlayActivityStartTime=" + tmallPlayActivityStartTime +
+                    ", userType=" + userType +
+                    ", volume=" + volume +
+                    ", zkFinalPrice='" + zkFinalPrice + '\'' +
+                    '}';
+        }
+
         @SerializedName("category_id")
-        private Integer categoryId;
-        @SerializedName("category_name")
-        private Object categoryName;
+        private Long categoryId;
         @SerializedName("click_url")
         private String clickUrl;
         @SerializedName("commission_rate")
         private String commissionRate;
         @SerializedName("coupon_amount")
-        private Integer couponAmount;
+        private Long couponAmount;
         @SerializedName("coupon_click_url")
         private String couponClickUrl;
         @SerializedName("coupon_end_time")
         private String couponEndTime;
-        @SerializedName("coupon_info")
-        private Object couponInfo;
         @SerializedName("coupon_remain_count")
-        private Integer couponRemainCount;
+        private Long couponRemainCount;
         @SerializedName("coupon_share_url")
         private String couponShareUrl;
         @SerializedName("coupon_start_fee")
@@ -73,48 +111,46 @@ public class HomePageContent {
         @SerializedName("coupon_start_time")
         private String couponStartTime;
         @SerializedName("coupon_total_count")
-        private Integer couponTotalCount;
+        private Long couponTotalCount;
         @SerializedName("item_description")
         private String itemDescription;
         @SerializedName("item_id")
-        private Long itemId;
+        private String itemId;
         @SerializedName("level_one_category_id")
-        private Integer levelOneCategoryId;
+        private Long levelOneCategoryId;
         @SerializedName("level_one_category_name")
         private String levelOneCategoryName;
-        @SerializedName("nick")
-        private String nick;
         @SerializedName("pict_url")
         private String pictUrl;
+        @SerializedName("reserve_price")
+        private String reservePrice;
         @SerializedName("seller_id")
-        private Integer sellerId;
-        @SerializedName("shop_title")
-        private String shopTitle;
+        private Long sellerId;
+        @SerializedName("short_title")
+        private Object shortTitle;
         @SerializedName("small_images")
         private SmallImagesDTO smallImages;
+        @SerializedName("sub_title")
+        private String subTitle;
         @SerializedName("title")
         private String title;
+        @SerializedName("tmall_play_activity_end_time")
+        private Long tmallPlayActivityEndTime;
+        @SerializedName("tmall_play_activity_start_time")
+        private Long tmallPlayActivityStartTime;
         @SerializedName("user_type")
-        private Integer userType;
+        private Long userType;
         @SerializedName("volume")
-        private Integer volume;
+        private Long volume;
         @SerializedName("zk_final_price")
         private String zkFinalPrice;
 
-        public Integer getCategoryId() {
+        public Long getCategoryId() {
             return categoryId;
         }
 
-        public void setCategoryId(Integer categoryId) {
+        public void setCategoryId(Long categoryId) {
             this.categoryId = categoryId;
-        }
-
-        public Object getCategoryName() {
-            return categoryName;
-        }
-
-        public void setCategoryName(Object categoryName) {
-            this.categoryName = categoryName;
         }
 
         public String getClickUrl() {
@@ -133,11 +169,11 @@ public class HomePageContent {
             this.commissionRate = commissionRate;
         }
 
-        public Integer getCouponAmount() {
+        public Long getCouponAmount() {
             return couponAmount;
         }
 
-        public void setCouponAmount(Integer couponAmount) {
+        public void setCouponAmount(Long couponAmount) {
             this.couponAmount = couponAmount;
         }
 
@@ -157,19 +193,11 @@ public class HomePageContent {
             this.couponEndTime = couponEndTime;
         }
 
-        public Object getCouponInfo() {
-            return couponInfo;
-        }
-
-        public void setCouponInfo(Object couponInfo) {
-            this.couponInfo = couponInfo;
-        }
-
-        public Integer getCouponRemainCount() {
+        public Long getCouponRemainCount() {
             return couponRemainCount;
         }
 
-        public void setCouponRemainCount(Integer couponRemainCount) {
+        public void setCouponRemainCount(Long couponRemainCount) {
             this.couponRemainCount = couponRemainCount;
         }
 
@@ -197,11 +225,11 @@ public class HomePageContent {
             this.couponStartTime = couponStartTime;
         }
 
-        public Integer getCouponTotalCount() {
+        public Long getCouponTotalCount() {
             return couponTotalCount;
         }
 
-        public void setCouponTotalCount(Integer couponTotalCount) {
+        public void setCouponTotalCount(Long couponTotalCount) {
             this.couponTotalCount = couponTotalCount;
         }
 
@@ -213,19 +241,19 @@ public class HomePageContent {
             this.itemDescription = itemDescription;
         }
 
-        public Long getItemId() {
+        public String getItemId() {
             return itemId;
         }
 
-        public void setItemId(Long itemId) {
+        public void setItemId(String itemId) {
             this.itemId = itemId;
         }
 
-        public Integer getLevelOneCategoryId() {
+        public Long getLevelOneCategoryId() {
             return levelOneCategoryId;
         }
 
-        public void setLevelOneCategoryId(Integer levelOneCategoryId) {
+        public void setLevelOneCategoryId(Long levelOneCategoryId) {
             this.levelOneCategoryId = levelOneCategoryId;
         }
 
@@ -237,14 +265,6 @@ public class HomePageContent {
             this.levelOneCategoryName = levelOneCategoryName;
         }
 
-        public String getNick() {
-            return nick;
-        }
-
-        public void setNick(String nick) {
-            this.nick = nick;
-        }
-
         public String getPictUrl() {
             return pictUrl;
         }
@@ -253,20 +273,28 @@ public class HomePageContent {
             this.pictUrl = pictUrl;
         }
 
-        public Integer getSellerId() {
+        public String getReservePrice() {
+            return reservePrice;
+        }
+
+        public void setReservePrice(String reservePrice) {
+            this.reservePrice = reservePrice;
+        }
+
+        public Long getSellerId() {
             return sellerId;
         }
 
-        public void setSellerId(Integer sellerId) {
+        public void setSellerId(Long sellerId) {
             this.sellerId = sellerId;
         }
 
-        public String getShopTitle() {
-            return shopTitle;
+        public Object getShortTitle() {
+            return shortTitle;
         }
 
-        public void setShopTitle(String shopTitle) {
-            this.shopTitle = shopTitle;
+        public void setShortTitle(Object shortTitle) {
+            this.shortTitle = shortTitle;
         }
 
         public SmallImagesDTO getSmallImages() {
@@ -277,6 +305,14 @@ public class HomePageContent {
             this.smallImages = smallImages;
         }
 
+        public String getSubTitle() {
+            return subTitle;
+        }
+
+        public void setSubTitle(String subTitle) {
+            this.subTitle = subTitle;
+        }
+
         public String getTitle() {
             return title;
         }
@@ -285,19 +321,35 @@ public class HomePageContent {
             this.title = title;
         }
 
-        public Integer getUserType() {
+        public Long getTmallPlayActivityEndTime() {
+            return tmallPlayActivityEndTime;
+        }
+
+        public void setTmallPlayActivityEndTime(Long tmallPlayActivityEndTime) {
+            this.tmallPlayActivityEndTime = tmallPlayActivityEndTime;
+        }
+
+        public Long getTmallPlayActivityStartTime() {
+            return tmallPlayActivityStartTime;
+        }
+
+        public void setTmallPlayActivityStartTime(Long tmallPlayActivityStartTime) {
+            this.tmallPlayActivityStartTime = tmallPlayActivityStartTime;
+        }
+
+        public Long getUserType() {
             return userType;
         }
 
-        public void setUserType(Integer userType) {
+        public void setUserType(Long userType) {
             this.userType = userType;
         }
 
-        public Integer getVolume() {
+        public Long getVolume() {
             return volume;
         }
 
-        public void setVolume(Integer volume) {
+        public void setVolume(Long volume) {
             this.volume = volume;
         }
 

@@ -1,15 +1,10 @@
 package com.hmetao.ticketunion.view;
 
+import com.hmetao.ticketunion.base.BaseCallback;
 import com.hmetao.ticketunion.model.domain.HomePageContent;
 
-public interface CategoryPageCallback {
+public interface CategoryPageCallback extends BaseCallback {
     void getContentByCategoryIdLoad(HomePageContent homePageContent);
-
-    void networkError(int categoryId);
-
-    void networkLoading(int categoryId);
-
-    void networkEmpty(int categoryId);
 
     void networkSuccess(int categoryId);
 
