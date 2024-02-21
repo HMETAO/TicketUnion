@@ -1,5 +1,6 @@
 package com.hmetao.ticketunion.presenter.impl;
 
+import com.hmetao.ticketunion.base.BaseFragment;
 import com.hmetao.ticketunion.base.RetrofitManager;
 import com.hmetao.ticketunion.model.Api;
 import com.hmetao.ticketunion.model.domain.Category;
@@ -19,21 +20,30 @@ public class HomePresenterImpl implements HomePresenter {
 
     @Override
     public void getCategories() {
+        if (callback != null) callback.networkLoading();
         Retrofit retrofit = RetrofitManager.getInstance();
         retrofit.create(Api.class).getCategories().enqueue(new Callback<Category>() {
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
                 if (response.code() == HttpURLConnection.HTTP_OK) {
-                    Category body = response.body();
-                    assert body != null;
-                    LogUtils.d(body.toString());
-                    if (callback != null) callback.getCategoriesLoad(body);
+                    Category category = response.body();
+                    assert category != null;
+                    LogUtils.d(category.toString());
+                    if (callback != null) {
+                        if (category.getData().size() == 0) {
+                            callback.networkEmpty();
+                        } else {
+                            callback.networkSuccess();
+                        }
+                        callback.getCategoriesLoad(category);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Category> call, Throwable t) {
                 LogUtils.e(t.getMessage());
+                callback.networkError();
             }
         });
     }

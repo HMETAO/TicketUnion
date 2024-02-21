@@ -21,8 +21,8 @@ public class SelectedFragment extends BaseFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View loadSuccessView(LayoutInflater inflater, ViewGroup container,
+                                Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_selected, container, false);
     }
 }

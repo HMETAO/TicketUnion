@@ -16,10 +16,10 @@ public class RedPacketFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    protected View loadSuccessView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_ret_packet, container, false);
     }
 }

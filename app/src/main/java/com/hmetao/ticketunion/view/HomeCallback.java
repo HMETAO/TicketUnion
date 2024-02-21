@@ -6,4 +6,10 @@ public interface HomeCallback {
 
     void getCategoriesLoad(Category category);
 
+    void networkError();
+
+    void networkLoading();
+
+    void networkEmpty();
+    void networkSuccess();
 }

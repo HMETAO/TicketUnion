@@ -15,7 +15,6 @@ import com.hmetao.ticketunion.model.domain.Category;
 import com.hmetao.ticketunion.presenter.HomePresenter;
 import com.hmetao.ticketunion.presenter.impl.HomePresenterImpl;
 import com.hmetao.ticketunion.ui.adapter.HomeAdapter;
-import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.view.HomeCallback;
 
 
@@ -28,8 +27,7 @@ public class HomeFragment extends BaseFragment implements HomeCallback {
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected View loadSuccessView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -52,11 +50,32 @@ public class HomeFragment extends BaseFragment implements HomeCallback {
 
     @Override
     public void getCategoriesLoad(Category category) {
+
         if (adapter == null) {
             initViewPager(category);
         } else {
             adapter.setData(category);
         }
+    }
+
+    @Override
+    public void networkError() {
+        setUpState(State.ERROR);
+    }
+
+    @Override
+    public void networkLoading() {
+        setUpState(State.LOADING);
+    }
+
+    @Override
+    public void networkEmpty() {
+        setUpState(State.EMPTY);
+    }
+
+    @Override
+    public void networkSuccess() {
+        setUpState(State.SUCCESS);
     }
 
     private void initViewPager(Category category) {
