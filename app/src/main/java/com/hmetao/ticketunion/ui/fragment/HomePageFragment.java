@@ -1,25 +1,23 @@
 package com.hmetao.ticketunion.ui.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.hmetao.ticketunion.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.hmetao.ticketunion.base.BaseFragment;
 import com.hmetao.ticketunion.databinding.FragmentHomePageBinding;
 import com.hmetao.ticketunion.model.domain.Category;
 import com.hmetao.ticketunion.model.domain.HomePageContent;
-import com.hmetao.ticketunion.presenter.CategoryPagePresenter;
 import com.hmetao.ticketunion.presenter.impl.CategoryPagePresenterImpl;
 import com.hmetao.ticketunion.ui.adapter.HomePageAdapter;
 import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.view.CategoryPageCallback;
+
+import java.util.List;
 
 
 public class HomePageFragment extends BaseFragment implements CategoryPageCallback {
@@ -95,7 +93,7 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
     }
 
     @Override
-    public void onLooperListLoaded(HomePageContent homePageContent) {
+    public void onLooperListLoaded(List<HomePageContent.DataDTO> dataDTOS) {
 
     }
 

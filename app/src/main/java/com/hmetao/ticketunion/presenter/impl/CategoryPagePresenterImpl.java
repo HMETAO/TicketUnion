@@ -10,8 +10,8 @@ import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.view.CategoryPageCallback;
 
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,10 +52,12 @@ public class CategoryPagePresenterImpl implements CategoryPagePresenter {
                             HomePageContent body = response.body();
                             assert body != null;
                             LogUtils.d(body.toString());
-                            if (body.getData() == null || body.getData().size() == 0)
+                            List<HomePageContent.DataDTO> list = body.getData();
+                            if (list == null || list.size() == 0)
                                 callback.networkEmpty();
-                            else{
+                            else {
                                 callback.getContentByCategoryIdLoad(body);
+                                callback.onLooperListLoaded(list.subList(list.size() - 5, list.size()));
                                 callback.networkSuccess();
                             }
                         }

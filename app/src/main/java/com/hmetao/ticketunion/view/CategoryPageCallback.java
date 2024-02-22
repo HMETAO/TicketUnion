@@ -3,6 +3,8 @@ package com.hmetao.ticketunion.view;
 import com.hmetao.ticketunion.base.BaseCallback;
 import com.hmetao.ticketunion.model.domain.HomePageContent;
 
+import java.util.List;
+
 public interface CategoryPageCallback extends BaseCallback {
     void getContentByCategoryIdLoad(HomePageContent homePageContent);
 
@@ -14,5 +16,5 @@ public interface CategoryPageCallback extends BaseCallback {
 
     void onLoaderMoreLoaded(HomePageContent homePageContent);
 
-    void onLooperListLoaded(HomePageContent homePageContent);
+    void onLooperListLoaded(List<HomePageContent.DataDTO> dataDTOS);
 }
