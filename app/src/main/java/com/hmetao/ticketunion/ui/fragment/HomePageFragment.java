@@ -15,6 +15,7 @@ import com.hmetao.ticketunion.model.domain.HomePageContent;
 import com.hmetao.ticketunion.presenter.impl.CategoryPagePresenterImpl;
 import com.hmetao.ticketunion.ui.adapter.HomePageAdapter;
 import com.hmetao.ticketunion.utils.LogUtils;
+import com.hmetao.ticketunion.utils.ToastUtils;
 import com.hmetao.ticketunion.view.CategoryPageCallback;
 
 import java.util.ArrayList;
@@ -81,17 +82,19 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
 
     @Override
     public void loadMoreError() {
+        ToastUtils.showToast(getContext(), "加载更多失败");
     }
 
     @Override
     public void loadMoreEmpty() {
-
+        ToastUtils.showToast(getContext(), "已全加载完毕");
     }
 
     @Override
     public void onLoaderMoreLoaded(HomePageContent homePageContent) {
         List<HomePageContent.DataDTO> current = adapter.getCurrentList();
         List<HomePageContent.DataDTO> data = homePageContent.getData();
+        ToastUtils.showToast(getContext(), "加载了" + data.size() + "条数据");
         ArrayList<HomePageContent.DataDTO> list = new ArrayList<>(current.size() + data.size());
         list.addAll(current);
         list.addAll(data);
@@ -112,7 +115,6 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
     @Override
     public void networkLoading() {
         setUpState(State.LOADING);
-
     }
 
     @Override
