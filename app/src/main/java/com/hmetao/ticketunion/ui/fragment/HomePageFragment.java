@@ -17,6 +17,7 @@ import com.hmetao.ticketunion.ui.adapter.HomePageAdapter;
 import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.view.CategoryPageCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,6 +58,11 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
         adapter = new HomePageAdapter();
         binding.rv.setAdapter(adapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            if (presenter != null) {
+                presenter.loadMore(data.getId());
+            }
+        });
     }
 
 
@@ -72,24 +78,25 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
         adapter.submitList(homePageContent.getData());
     }
 
-    @Override
-    public void networkSuccess(int categoryId) {
 
+    @Override
+    public void loadMoreError() {
     }
 
     @Override
-    public void loadMoreError(int categoryId) {
-
-    }
-
-    @Override
-    public void loadMoreEmpty(int categoryId) {
+    public void loadMoreEmpty() {
 
     }
 
     @Override
     public void onLoaderMoreLoaded(HomePageContent homePageContent) {
-
+        List<HomePageContent.DataDTO> current = adapter.getCurrentList();
+        List<HomePageContent.DataDTO> data = homePageContent.getData();
+        ArrayList<HomePageContent.DataDTO> list = new ArrayList<>(current.size() + data.size());
+        list.addAll(current);
+        list.addAll(data);
+        adapter.submitList(list);
+        binding.refreshLayout.finishLoadMore();
     }
 
     @Override

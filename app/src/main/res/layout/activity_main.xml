@@ -22,4 +22,5 @@
         app:itemTextColor="@drawable/navigation_bar_color"
         app:menu="@menu/my_navigation_items" />
 
+
 </LinearLayout>

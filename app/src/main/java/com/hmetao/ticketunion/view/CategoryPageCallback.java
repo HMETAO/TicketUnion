@@ -8,11 +8,9 @@ import java.util.List;
 public interface CategoryPageCallback extends BaseCallback {
     void getContentByCategoryIdLoad(HomePageContent homePageContent);
 
-    void networkSuccess(int categoryId);
+    void loadMoreError();
 
-    void loadMoreError(int categoryId);
-
-    void loadMoreEmpty(int categoryId);
+    void loadMoreEmpty();
 
     void onLoaderMoreLoaded(HomePageContent homePageContent);
 

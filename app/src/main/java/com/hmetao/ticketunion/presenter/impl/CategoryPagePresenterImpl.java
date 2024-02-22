@@ -42,9 +42,8 @@ public class CategoryPagePresenterImpl implements CategoryPagePresenter {
         }
         // 开启loading状态
         callback.networkLoading();
-        Retrofit retrofit = RetrofitManager.getInstance();
-        retrofit.create(Api.class)
-                .getContentByCategoryId(categoryId, pageInfo.getOrDefault(categoryId, 1))
+        Call<HomePageContent> task = returnTask(categoryId, pageInfo.getOrDefault(categoryId, 1));
+        task
                 .enqueue(new Callback<HomePageContent>() {
                     @Override
                     public void onResponse(@NonNull Call<HomePageContent> call, @NonNull Response<HomePageContent> response) {
@@ -71,9 +70,39 @@ public class CategoryPagePresenterImpl implements CategoryPagePresenter {
                 });
     }
 
+    private Call<HomePageContent> returnTask(int categoryId, int page) {
+        Retrofit retrofit = RetrofitManager.getInstance();
+        return retrofit.create(Api.class)
+                .getContentByCategoryId(categoryId, page);
+    }
+
     @Override
     public void loadMore(int categoryId) {
+        CategoryPageCallback callback = map.get(categoryId);
+        if (callback == null) {
+            LogUtils.e(categoryId + "未获取到callback");
+            return;
+        }
+        pageInfo.put(categoryId, pageInfo.getOrDefault(categoryId, 1) + 1);
+        Call<HomePageContent> task = returnTask(categoryId, pageInfo.get(categoryId));
+        task.enqueue(new Callback<HomePageContent>() {
+            @Override
+            public void onResponse(@NonNull Call<HomePageContent> call, @NonNull Response<HomePageContent> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    callback.onLoaderMoreLoaded(response.body());
+                    LogUtils.d(response.body().toString());
+                } else {
+                    pageInfo.put(categoryId, pageInfo.get(categoryId) - 1);
+                }
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<HomePageContent> call, @NonNull Throwable t) {
+                LogUtils.e(t.getMessage());
+                callback.loadMoreError();
+                pageInfo.put(categoryId, pageInfo.get(categoryId) - 1);
+            }
+        });
     }
 
     @Override
