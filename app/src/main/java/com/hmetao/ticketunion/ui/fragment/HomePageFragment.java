@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +27,7 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
 
     Category.DataDTO data;
     private CategoryPagePresenterImpl presenter;
-    private com.hmetao.ticketunion.databinding.FragmentHomePageBinding binding;
+    private FragmentHomePageBinding binding;
     private HomePageAdapter adapter;
 
     public HomePageFragment(Category.DataDTO data) {
@@ -56,6 +57,23 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
 
     @Override
     protected void initView(FrameLayout root) {
+        binding.root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int height = binding.root.getMeasuredHeight();
+                LogUtils.d("onGlobalLayout" + height);
+                ViewGroup.LayoutParams layoutParams = binding.rv.getLayoutParams();
+
+                layoutParams.height = height;
+                binding.rv.setLayoutParams(layoutParams);
+
+                int height1 = binding.llTitle.getMeasuredHeight();
+                binding.nestedScrollView.setHeight(height1);
+                if (height != 0 && height1 != 0) {
+                    binding.root.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
         adapter = new HomePageAdapter();
         binding.rv.setAdapter(adapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -64,6 +82,7 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
                 presenter.loadMore(data.getId());
             }
         });
+
     }
 
 

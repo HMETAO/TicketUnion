@@ -43,31 +43,30 @@ public class CategoryPagePresenterImpl implements CategoryPagePresenter {
         // 开启loading状态
         callback.networkLoading();
         Call<HomePageContent> task = returnTask(categoryId, pageInfo.getOrDefault(categoryId, 1));
-        task
-                .enqueue(new Callback<HomePageContent>() {
-                    @Override
-                    public void onResponse(@NonNull Call<HomePageContent> call, @NonNull Response<HomePageContent> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
-                            HomePageContent body = response.body();
-                            assert body != null;
-                            LogUtils.d(body.toString());
-                            List<HomePageContent.DataDTO> list = body.getData();
-                            if (list == null || list.size() == 0)
-                                callback.networkEmpty();
-                            else {
-                                callback.getContentByCategoryIdLoad(body);
-                                callback.onLooperListLoaded(list.subList(list.size() - 5, list.size()));
-                                callback.networkSuccess();
-                            }
-                        }
+        task.enqueue(new Callback<HomePageContent>() {
+            @Override
+            public void onResponse(@NonNull Call<HomePageContent> call, @NonNull Response<HomePageContent> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK) {
+                    HomePageContent body = response.body();
+                    assert body != null;
+                    LogUtils.d(body.toString());
+                    List<HomePageContent.DataDTO> list = body.getData();
+                    if (list == null || list.size() == 0)
+                        callback.networkEmpty();
+                    else {
+                        callback.getContentByCategoryIdLoad(body);
+                        callback.onLooperListLoaded(list.subList(list.size() - 5, list.size()));
+                        callback.networkSuccess();
                     }
+                }
+            }
 
-                    @Override
-                    public void onFailure(@NonNull Call<HomePageContent> call, @NonNull Throwable t) {
-                        LogUtils.e(t.getMessage());
-                        callback.networkError();
-                    }
-                });
+            @Override
+            public void onFailure(@NonNull Call<HomePageContent> call, @NonNull Throwable t) {
+                LogUtils.e(t.getMessage());
+                callback.networkError();
+            }
+        });
     }
 
     private Call<HomePageContent> returnTask(int categoryId, int page) {

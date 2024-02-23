@@ -1,4 +1,4 @@
-package com.hmetao.ticketunion.base;
+package com.hmetao.ticketunion.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,13 +6,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
-import java.util.HashMap;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
+
+import java.util.HashMap;
 
 /**
  * 此类用于解决 ViewPager2  嵌套 ViewPager2 或者 RecyclerView 等相互嵌套的冲突问题，
