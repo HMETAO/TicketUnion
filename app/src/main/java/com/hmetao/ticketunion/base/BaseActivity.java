@@ -12,9 +12,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getRoot());
+        initPresenter();
         initView();
         initEvent();
-        initPresenter();
+        loadData();
+    }
+
+    protected void loadData() {
     }
 
     @Override

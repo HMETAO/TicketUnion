@@ -11,11 +11,9 @@ import android.widget.FrameLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hmetao.ticketunion.base.BaseFragment;
-import com.hmetao.ticketunion.base.TicketManager;
 import com.hmetao.ticketunion.databinding.FragmentHomePageBinding;
 import com.hmetao.ticketunion.model.domain.Category;
 import com.hmetao.ticketunion.model.domain.HomePageContent;
-import com.hmetao.ticketunion.presenter.TicketPresenter;
 import com.hmetao.ticketunion.presenter.impl.CategoryPagePresenterImpl;
 import com.hmetao.ticketunion.ui.activity.TicketActivity;
 import com.hmetao.ticketunion.ui.adapter.HomePageAdapter;
@@ -154,9 +152,12 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
     @Override
     public void onItemClick(HomePageContent.DataDTO data) {
         LogUtils.d(data.toString());
-        TicketPresenter presenter = TicketManager.getInstance();
-        presenter.getTicket(data.getTitle(), data.getClickUrl(), data.getPictUrl());
         Intent intent = new Intent(getContext(), TicketActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("cover", data.getPictUrl());
+        bundle.putString("title", data.getTitle());
+        bundle.putString("url", data.getClickUrl());
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

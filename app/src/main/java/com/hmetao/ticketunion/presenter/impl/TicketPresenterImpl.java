@@ -38,8 +38,8 @@ public class TicketPresenterImpl implements TicketPresenter {
             @Override
             public void onResponse(@NonNull Call<TicketResult> call, @NonNull Response<TicketResult> response) {
                 if (response.code() == HttpURLConnection.HTTP_OK) {
-//                    callback.onTicketLoaded();
                     LogUtils.d("onResponse" + response.body());
+                    callback.onTicketLoaded(cover, response.body());
                 }
             }
 
