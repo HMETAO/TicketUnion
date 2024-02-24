@@ -1,30 +1,39 @@
 package com.hmetao.ticketunion.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hmetao.ticketunion.R;
+import com.hmetao.ticketunion.base.BaseActivity;
+import com.hmetao.ticketunion.base.BaseAdapterBuilder;
 import com.hmetao.ticketunion.databinding.ActivityMainBinding;
 import com.hmetao.ticketunion.ui.adapter.BaseAdapter;
-import com.hmetao.ticketunion.base.BaseAdapterBuilder;
 import com.hmetao.ticketunion.ui.fragment.HomeFragment;
 import com.hmetao.ticketunion.ui.fragment.RedPacketFragment;
 import com.hmetao.ticketunion.ui.fragment.SearchFragment;
 import com.hmetao.ticketunion.ui.fragment.SelectedFragment;
 import com.hmetao.ticketunion.utils.LogUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected View getRoot() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
+
+    @Override
+    protected void initView() {
         // 初始化监听
         initListener();
     }

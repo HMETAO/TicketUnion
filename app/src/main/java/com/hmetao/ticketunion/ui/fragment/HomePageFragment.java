@@ -154,8 +154,8 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
     @Override
     public void onItemClick(HomePageContent.DataDTO data) {
         LogUtils.d(data.toString());
-        TicketPresenter instance = TicketManager.getInstance();
-        instance.getTicket(data.getTitle(), data.getClickUrl(), data.getPictUrl());
+        TicketPresenter presenter = TicketManager.getInstance();
+        presenter.getTicket(data.getTitle(), data.getClickUrl(), data.getPictUrl());
         Intent intent = new Intent(getContext(), TicketActivity.class);
         startActivity(intent);
     }
