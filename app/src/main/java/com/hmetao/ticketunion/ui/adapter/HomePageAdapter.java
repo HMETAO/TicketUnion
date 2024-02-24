@@ -22,6 +22,8 @@ import java.util.Objects;
 
 public class HomePageAdapter extends ListAdapter<HomePageContent.DataDTO, HomePageAdapter.ViewHolder> {
 
+    private OnItemClickListener onItemClickListener;
+
     public HomePageAdapter() {
         super(new DiffUtil.ItemCallback<HomePageContent.DataDTO>() {
             @Override
@@ -41,11 +43,18 @@ public class HomePageAdapter extends ListAdapter<HomePageContent.DataDTO, HomePa
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LogUtils.d("onCreateViewHolder....");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_linear_goods_content, parent, false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(getItem(viewHolder.position));
+            }
+        });
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.position = holder.getAdapterPosition();
         LogUtils.d("onBindViewHolder...." + position);
         HomePageContent.DataDTO item = getItem(position);
         View view = holder.itemView;
@@ -71,10 +80,21 @@ public class HomePageAdapter extends ListAdapter<HomePageContent.DataDTO, HomePa
 
     }
 
+
     static class ViewHolder extends RecyclerView.ViewHolder {
+        int position;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(HomePageContent.DataDTO data);
+    }
 }
+

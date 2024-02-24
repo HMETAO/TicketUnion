@@ -1,5 +1,6 @@
 package com.hmetao.ticketunion.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.hmetao.ticketunion.databinding.FragmentHomePageBinding;
 import com.hmetao.ticketunion.model.domain.Category;
 import com.hmetao.ticketunion.model.domain.HomePageContent;
 import com.hmetao.ticketunion.presenter.impl.CategoryPagePresenterImpl;
+import com.hmetao.ticketunion.ui.activity.TicketActivity;
 import com.hmetao.ticketunion.ui.adapter.HomePageAdapter;
 import com.hmetao.ticketunion.utils.LogUtils;
 import com.hmetao.ticketunion.utils.ToastUtils;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomePageFragment extends BaseFragment implements CategoryPageCallback {
+public class HomePageFragment extends BaseFragment implements CategoryPageCallback, HomePageAdapter.OnItemClickListener {
 
     Category.DataDTO data;
     private CategoryPagePresenterImpl presenter;
@@ -75,6 +77,7 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
             }
         });
         adapter = new HomePageAdapter();
+        adapter.setOnItemClickListener(this);
         binding.rv.setAdapter(adapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.refreshLayout.setOnLoadMoreListener(refreshLayout -> {
@@ -145,4 +148,14 @@ public class HomePageFragment extends BaseFragment implements CategoryPageCallba
     public void networkSuccess() {
         setUpState(State.SUCCESS);
     }
+
+    @Override
+    public void onItemClick(HomePageContent.DataDTO data) {
+        LogUtils.d(data.toString());
+        Intent intent = new Intent(getContext(), TicketActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
 }
