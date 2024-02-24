@@ -3,6 +3,15 @@ package com.hmetao.ticketunion.model.domain;
 import com.google.gson.annotations.SerializedName;
 
 public class TicketResult {
+    @Override
+    public String toString() {
+        return "TicketResult{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
 
     @SerializedName("success")
     private Boolean success;
@@ -46,6 +55,13 @@ public class TicketResult {
     }
 
     public static class DataDTO {
+        @Override
+        public String toString() {
+            return "DataDTO{" +
+                    "tbkTpwdCreateResponse=" + tbkTpwdCreateResponse +
+                    '}';
+        }
+
         @SerializedName("tbk_tpwd_create_response")
         private TbkTpwdCreateResponseDTO tbkTpwdCreateResponse;
 
@@ -58,6 +74,14 @@ public class TicketResult {
         }
 
         public static class TbkTpwdCreateResponseDTO {
+            @Override
+            public String toString() {
+                return "TbkTpwdCreateResponseDTO{" +
+                        "data=" + data +
+                        ", requestId='" + requestId + '\'' +
+                        '}';
+            }
+
             @SerializedName("data")
             private DataSonDTO data;
             @SerializedName("request_id")
