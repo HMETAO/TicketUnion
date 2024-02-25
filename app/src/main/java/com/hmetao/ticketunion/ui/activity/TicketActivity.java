@@ -1,6 +1,9 @@
 package com.hmetao.ticketunion.ui.activity;
 
-import android.content.pm.PackageInfo;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +22,7 @@ public class TicketActivity extends BaseActivity implements TicketCallback {
 
     private ActivityTicketBinding binding;
     private TicketPresenter presenter;
+    private boolean check = false;
 
     @Override
     protected View getRoot() {
@@ -39,19 +43,37 @@ public class TicketActivity extends BaseActivity implements TicketCallback {
     protected void initPresenter() {
         presenter = TicketManager.getInstance();
         presenter.registerCallback(this);
-        PackageManager pm = getPackageManager();
-        boolean check = false;
-        try {
-            PackageInfo packageInfo = pm.getPackageInfo("com.taobao.taobao", PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            check = packageInfo != null;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+        check = isAppInstalled(this, "com.taobao.taobao");
         if (!check) {
             ToastUtils.showToast(this, "请先安装淘宝客户端");
         }
+    }
 
+    private boolean isAppInstalled(Context context, String uri) {
+        PackageManager pm = context.getPackageManager();
+        boolean installed;
+        try {
+            pm.getPackageInfo(uri, PackageManager.MATCH_UNINSTALLED_PACKAGES);
+            installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            installed = false;
+        }
+        return installed;
+    }
 
+    @Override
+    protected void initEvent() {
+        binding.ticketCopyOrOpenBtn.setOnClickListener(v -> {
+            String code = binding.ticketCode.getText().toString();
+            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            cm.setPrimaryClip(ClipData.newPlainText("ticket", code));
+            if (!check) {
+                ToastUtils.showToast(this, "复制成功");
+            } else {
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.taobao.taobao");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
